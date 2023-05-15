@@ -1,0 +1,17 @@
+<div class="box-wrapper">
+  <div>
+    {{ pizza?.name }}
+  </div>
+  <div>
+    <span *ngFor="let component of pizza?.components; let last = last">
+      {{component}}{{last ? '' : ','}}
+    </span>
+  </div>
+  <div class="price-container">
+    {{ pizza?.price }}
+    {{ pizza?.currency}}
+  </div>
+  <div class="date-container">
+    {{ pizza?.availableFrom }}
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<app-pizza-filter></app-pizza-filter>
+<div class="pizza-list-wrapper">
+  <app-pizza-item
+    *ngFor="let pizza of pizzas$ | async"
+    [pizza]="pizza"
+    class="pizza-item"
+    [routerLink]="'/' + pizza.name"
+  ></app-pizza-item>
+</div>

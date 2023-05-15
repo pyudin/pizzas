@@ -1,0 +1,18 @@
+.box-wrapper {
+  width: 60vw;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px 100px;
+  align-items: center;
+}
+
+.price-container {
+  text-align: end;
+}
+
+.date-container {
+  text-align: end;
+}

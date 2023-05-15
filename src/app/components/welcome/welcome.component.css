@@ -1,0 +1,16 @@
+.background-pic {
+  background-image: url('../../../assets/pizza-welcome.jpeg');
+  background-position: center;
+  background-size: cover;
+  height: calc(100vh - 60px);
+}
+
+a {
+  text-decoration: none;
+  color: azure;
+}
+.open-list {
+  padding: 60px 100px;
+  font-size: 100px;
+
+}
