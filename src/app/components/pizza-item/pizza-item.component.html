@@ -1,6 +1,6 @@
 <div class="box-wrapper">
   <div>
-    {{ pizza?.name }}
+    {{ pizza?.name | countryName}}
   </div>
   <div>
     <span *ngFor="let component of pizza?.components; let last = last">

@@ -3,7 +3,7 @@ export interface Pizza {
   name: string;
   price: number;
   components: string[];
-  type: string[];
+  types: string[];
   availableFrom: string;
   currency: string;
 }

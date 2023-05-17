@@ -10,11 +10,22 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PizzaFilterComponent } from './components/pizza-filter/pizza-filter.component';
 import { PizzaItemComponent } from './components/pizza-item/pizza-item.component';
 import { PizzaPageComponent } from './components/pizza-page/pizza-page.component';
+import { CountryNamePipe } from './pipes/country-name.pipe';
+import { PizzaStore } from './components/component-store/pizza.store';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, PizzaListComponent, WelcomeComponent, PizzaFilterComponent, PizzaItemComponent, PizzaPageComponent],
+  declarations: [
+    AppComponent,
+    NotFoundComponent,
+    PizzaListComponent,
+    WelcomeComponent,
+    PizzaFilterComponent,
+    PizzaItemComponent,
+    PizzaPageComponent,
+    CountryNamePipe,
+  ],
   imports: [BrowserModule, AppRoutingModule, RouterModule],
-  providers: [],
+  providers: [PizzaStore],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
