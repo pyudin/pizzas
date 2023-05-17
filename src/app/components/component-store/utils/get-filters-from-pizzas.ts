@@ -31,7 +31,6 @@ export function getFiltersFromPizzas(pizzas: Pizza[]): Filter[] {
     filterId: FilterId.Components,
     values: getFilterValues(pizzas, 'components'),
   });
-  console.log(filterOptions);
 
   return filterOptions;
 }

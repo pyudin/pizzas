@@ -1,2 +1,12 @@
-<select name="types">
-</select>
+<div *ngIf="filters !== null" class="select-container">
+    <select  name="types" [formControl]="filterTypesControl">
+        <option selected value> All </option>
+        <option *ngFor="let filter of filters[0].values" [value]="filter.value">{{filter.value}} {{filter.count}}</option>
+    </select>
+    <select  name="components" [formControl]="filterComponentsControl">
+        <option selected value> All </option>
+        <option *ngFor="let filter of filters[1].values"[value]="filter.value">{{filter.value}} {{filter.count}}</option>
+    </select>
+    
+</div>
+

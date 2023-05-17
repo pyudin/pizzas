@@ -1,4 +1,4 @@
-<app-pizza-filter></app-pizza-filter>
+<app-pizza-filter [filters]="filters$ | async "></app-pizza-filter>
 <div class="pizza-list-wrapper">
   <app-pizza-item
     *ngFor="let pizza of pizzas$ | async"

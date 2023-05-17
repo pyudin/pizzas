@@ -5,7 +5,10 @@ import { Observable, tap } from 'rxjs';
 //import { Store } from '@ngrx/store';
 //import { getPizzasRequested } from 'src/app/store/actions/pizzas.actions';
 import { PizzaStore } from '../component-store/pizza.store';
-import { getFiltersFromPizzas } from '../component-store/utils/get-filters-from-pizzas';
+import {
+  Filter,
+  getFiltersFromPizzas,
+} from '../component-store/utils/get-filters-from-pizzas';
 
 @Component({
   selector: 'app-pizza-list',
@@ -13,9 +16,11 @@ import { getFiltersFromPizzas } from '../component-store/utils/get-filters-from-
   styleUrls: ['./pizza-list.component.css'],
 })
 export class PizzaListComponent implements OnInit {
-  pizzas$: Observable<Pizza[]> = this.pizzaStore.selectPizzas$.pipe(
-    tap((pizzas) => getFiltersFromPizzas(pizzas))
-  );
+  pizzas$: Observable<Pizza[]> = this.pizzaStore.selectPizzasWithFilters$
+    .pipe
+    // tap((pizzas) => getFiltersFromPizzas(pizzas))
+    ();
+  filters$: Observable<Filter[]> = this.pizzaStore.selectFilters$;
 
   constructor(
     public pizzaApi: PizzaApiService, // private store: Store

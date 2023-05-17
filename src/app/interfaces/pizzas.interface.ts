@@ -1,3 +1,5 @@
+import { FilterId } from "../components/component-store/utils/get-filters-from-pizzas";
+
 export interface Pizza {
   id: number;
   name: string;
@@ -6,4 +8,10 @@ export interface Pizza {
   types: string[];
   availableFrom: string;
   currency: string;
+}
+
+export interface ActiveFilter {
+  filterId: FilterId;
+  values: string[];
+
 }
