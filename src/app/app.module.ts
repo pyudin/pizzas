@@ -13,6 +13,8 @@ import { PizzaPageComponent } from './components/pizza-page/pizza-page.component
 import { CountryNamePipe } from './pipes/country-name.pipe';
 import { PizzaStore } from './components/component-store/pizza.store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PizzaBadgeComponent } from './components/pizza-badge/pizza-badge.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PizzaItemComponent,
     PizzaPageComponent,
     CountryNamePipe,
+    PizzaBadgeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, RouterModule, FormsModule, ReactiveFormsModule, NgbModule],
   providers: [PizzaStore],
   bootstrap: [AppComponent],
 })

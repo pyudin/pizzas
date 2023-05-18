@@ -1,0 +1,7 @@
+<div *ngFor="let type of types">
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'Hot'" class="badge bg-danger">HOT</div>
+    <div *ngSwitchCase="'Meat'" class="badge meat">MEAT</div>
+    <div *ngSwitchCase="'Vegan'" class="badge vegan">VEGAN</div>
+  </div>
+</div>

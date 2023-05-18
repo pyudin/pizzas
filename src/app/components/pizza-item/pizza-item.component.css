@@ -9,6 +9,14 @@
   align-items: center;
 }
 
+.name-container {
+  display: flex;
+  align-items: center;
+}
+.pizza-name {
+  margin-right: 20px;
+}
+
 .price-container {
   text-align: end;
 }

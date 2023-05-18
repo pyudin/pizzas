@@ -40,7 +40,7 @@ export class PizzaApiService {
           'chicken',
           'pineapple',
         ],
-        types: [PizzaType.HOT, PizzaType.MEAT],
+        types: [PizzaType.HOT],
         availableFrom: 'time',
         currency: 'UAH',
       },

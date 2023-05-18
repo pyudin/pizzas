@@ -3,12 +3,7 @@ import {
   Filter,
   FilterId,
 } from '../component-store/utils/get-filters-from-pizzas';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
 
 @Component({
@@ -21,8 +16,8 @@ export class PizzaFilterComponent implements OnInit {
   filters: Filter[] | null = [];
   filterTypesControl: FormControl;
   filterComponentsControl: FormControl;
-  public pizzasWithFilters$ =
-    this.pizzasStore.selectPizzasWithFilters$.subscribe();
+  // public pizzasWithFilters$ =
+  //   this.pizzasStore.selectPizzasWithFilters$.subscribe();
 
   constructor(private pizzasStore: PizzaStore, private fb: FormBuilder) {
     this.filterTypesControl = new FormControl('types');

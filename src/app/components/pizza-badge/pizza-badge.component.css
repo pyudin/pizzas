@@ -1,0 +1,20 @@
+.badge {
+  color: #000000;
+  padding: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  /* display: flex;
+  justify-content: center; */
+  margin: 0 auto;
+}
+
+.hot {
+  background-color: rgb(247, 117, 117);
+}
+
+.meat {
+  background-color: rgb(213, 169, 187);
+}
+.vegan {
+  background-color: rgb(77, 216, 135);
+}
