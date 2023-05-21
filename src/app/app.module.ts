@@ -15,20 +15,21 @@ import { PizzaStore } from './components/component-store/pizza.store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PizzaBadgeComponent } from './components/pizza-badge/pizza-badge.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    PizzaListComponent,
+  declarations: [AppComponent, CountryNamePipe],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+    NgbModule,
     WelcomeComponent,
-    PizzaFilterComponent,
-    PizzaItemComponent,
     PizzaPageComponent,
-    CountryNamePipe,
-    PizzaBadgeComponent,
+    PizzaListComponent,
+    NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule, FormsModule, ReactiveFormsModule, NgbModule],
   providers: [PizzaStore],
   bootstrap: [AppComponent],
 })

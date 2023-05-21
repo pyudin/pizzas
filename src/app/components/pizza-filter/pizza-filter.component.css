@@ -12,3 +12,8 @@
   border-radius: 50%;
   font-size: 8px;
 }
+.select-container {
+  width: 60%;
+  height: auto;
+  margin: 20px auto;
+}

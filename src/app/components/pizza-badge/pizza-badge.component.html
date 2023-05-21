@@ -1,4 +1,4 @@
-<div *ngFor="let type of types">
+<div *ngFor="let type of types; trackBy: trackByFn">
   <div [ngSwitch]="type">
     <div *ngSwitchCase="'Hot'" class="badge bg-danger">HOT</div>
     <div *ngSwitchCase="'Meat'" class="badge meat">MEAT</div>

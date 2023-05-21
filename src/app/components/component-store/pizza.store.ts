@@ -3,7 +3,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ActiveFilter, Pizza } from '../../interfaces/pizzas.interface';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { map, Observable, of, switchMap, tap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { PizzaApiService } from '../../services/pizza-api.service';
 import {
   Filter,
@@ -34,6 +34,31 @@ export const initialState: PizzaStoreState = adapter.getInitialState({
 export const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
 
+type filterCheckFn = (pizza: Pizza, values: string[]) => boolean;
+
+type filterFitMappers = {
+  [key in FilterId]: filterCheckFn;
+};
+
+const isTypeFitFn: filterCheckFn = (pizza: Pizza, values: string[]) => {
+  for (let i = 0; i < values.length; i++) {
+    if (pizza.types.includes(values[i])) return true;
+  }
+  if (!values.length) return true;
+  return false;
+};
+const isComponentFitFn: filterCheckFn = (pizza: Pizza, values: string[]) => {
+  for (let i = 0; i < values.length; i++) {
+    if (pizza.components.includes(values[i])) return true;
+  }
+  if (!values.length) return true;
+  return false;
+};
+const isFilterFit: filterFitMappers = {
+  [FilterId.Types]: isTypeFitFn,
+  [FilterId.Components]: isComponentFitFn,
+};
+
 @Injectable()
 export class PizzaStore extends ComponentStore<PizzaStoreState> {
   private readonly pizzaApiService = inject(PizzaApiService);
@@ -48,34 +73,13 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
   public selectPizzasWithFilters$ = this.select(
     this.selectPizzas$,
     this.selectActiveFilters$,
-    (pizzas, activeFilters) => {
-      const filteredPizzas = pizzas
-        .filter((pizza) => {
-          let pizzaTypeFit: boolean = true;
-          const typesFilter = activeFilters.filter(
-            (f) => f.filterId === FilterId.Types
-          );
-          if (!!typesFilter.length) {
-            if (typesFilter[0].values[0] === '') return pizzaTypeFit;
-            pizzaTypeFit = pizza.types.includes(typesFilter[0].values[0]);
-          }
-          return pizzaTypeFit;
+    (pizzas, activeFilters) =>
+      pizzas.filter((pizza) =>
+        activeFilters.every((filter) => {
+          const filterFn = isFilterFit[filter.filterId];
+          return filterFn(pizza, filter.values);
         })
-        .filter((pizza) => {
-          let pizzaComponentFit: boolean = true;
-          const componentsFilter = activeFilters.filter(
-            (f) => f.filterId === FilterId.Components
-          );
-          if (!!componentsFilter.length) {
-            if (componentsFilter[0].values[0] === '') return componentsFilter;
-            pizzaComponentFit = pizza.components.includes(
-              componentsFilter[0].values[0]
-            );
-          }
-          return pizzaComponentFit;
-        });
-      return filteredPizzas;
-    }
+      )
   );
 
   constructor() {
@@ -93,7 +97,6 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
           newFilter,
         ],
       };
-      // console.log(newState);
       return newState;
     });
   };

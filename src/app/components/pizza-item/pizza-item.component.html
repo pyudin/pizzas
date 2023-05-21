@@ -6,7 +6,7 @@
       <app-pizza-badge [types]="pizza?.types"></app-pizza-badge>
   </div>
   <div>
-    <span *ngFor="let component of pizza?.components; let last = last">
+    <span *ngFor="let component of pizza?.components; let last = last; trackBy: trackByFn">
       {{ component }}{{ last ? "" : "," }}
     </span>
   </div>

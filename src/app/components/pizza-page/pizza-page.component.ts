@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-pizza-page',
   templateUrl: './pizza-page.component.html',
   styleUrls: ['./pizza-page.component.css'],
 })
 export class PizzaPageComponent implements OnInit {
-  pizzaName?: string | null;
+  public pizzaName?: string | null;
 
   constructor(private route: ActivatedRoute) {}
   ngOnInit() {
