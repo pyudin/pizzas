@@ -18,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  declarations: [AppComponent, CountryNamePipe],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +29,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PizzaListComponent,
     NotFoundComponent,
   ],
-  providers: [PizzaStore],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

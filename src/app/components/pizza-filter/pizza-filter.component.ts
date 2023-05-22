@@ -1,11 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
   Filter,
   FilterId,
 } from '../component-store/utils/get-filters-from-pizzas';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 
@@ -15,9 +15,11 @@ import { CommonModule } from '@angular/common';
   selector: 'app-pizza-filter',
   templateUrl: './pizza-filter.component.html',
   styleUrls: ['./pizza-filter.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PizzaFilterComponent implements OnInit {
   private pizzasStore = inject(PizzaStore);
+
   public filters$: Observable<Filter[]> = this.pizzasStore.selectFilters$;
   public filterTypesControl: FormControl = new FormControl([]);
   public filterComponentsControl: FormControl = new FormControl([]);
