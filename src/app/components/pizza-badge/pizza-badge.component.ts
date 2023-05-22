@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { NgFor, NgSwitch, NgSwitchCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor, NgSwitch, NgSwitchCase],
   selector: 'app-pizza-badge',
   templateUrl: './pizza-badge.component.html',
   styleUrls: ['./pizza-badge.component.css'],

@@ -15,35 +15,38 @@
     </option>
   </select>
 </div> -->
-<div *ngIf="filters$ | async as filters" class="select-container">
-  <div class="select-container">
-    <ng-select
-      [multiple]="true"
-      [items]="filters[0].values"
-      bindLabel="value"
-      bindValue="value"
-      [multiple]="true"
-      placeholder="Select types"
-      [formControl]="filterTypesControl"
-    >
-      <ng-template ng-option-tmp let-filter="item" let-index="index">
-        {{ filter.value }} {{ filter.count }}
-      </ng-template>
-    </ng-select>
+<div class="sticky-container">
+  <div *ngIf="filters$ | async as filters" class="select-container">
+    <div class="select-container">
+      <ng-select
+        [multiple]="true"
+        [items]="filters[0].values"
+        bindLabel="value"
+        bindValue="value"
+        [multiple]="true"
+        placeholder="Select types"
+        [formControl]="filterTypesControl"
+      >
+        <ng-template ng-option-tmp let-filter="item" let-index="index">
+          {{ filter.value }} {{ filter.count }}
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="select-container">
+      <ng-select
+        [multiple]="true"
+        [items]="filters[1].values"
+        bindLabel="value"
+        bindValue="value"
+        [multiple]="true"
+        placeholder="Select components"
+        [formControl]="filterComponentsControl"
+      >
+        <ng-template ng-option-tmp let-filter="item" let-index="index">
+          {{ filter.value }} {{ filter.count }}
+        </ng-template>
+      </ng-select>
+    </div>
   </div>
-  <div class="select-container">
-    <ng-select
-      [multiple]="true"
-      [items]="filters[1].values"
-      bindLabel="value"
-      bindValue="value"
-      [multiple]="true"
-      placeholder="Select components"
-      [formControl]="filterComponentsControl"
-    >
-      <ng-template ng-option-tmp let-filter="item" let-index="index">
-        {{ filter.value }} {{ filter.count }}
-      </ng-template>
-    </ng-select>
-  </div>
+  <hr class="dotted" />
 </div>

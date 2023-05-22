@@ -23,7 +23,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule,
     NgbModule,
     WelcomeComponent,
     PizzaPageComponent,

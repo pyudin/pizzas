@@ -62,6 +62,7 @@ const isFilterFit: filterFitMappers = {
 @Injectable()
 export class PizzaStore extends ComponentStore<PizzaStoreState> {
   private readonly pizzaApiService = inject(PizzaApiService);
+  
   public selectPizzas$ = this.select(selectAll);
   public pizzasAvailableCount$ = this.select(selectTotal);
   public isAvailablePizza$ = this.select(

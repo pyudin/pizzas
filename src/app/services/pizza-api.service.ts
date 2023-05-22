@@ -74,6 +74,51 @@ export class PizzaApiService {
         availableFrom: 'time',
         currency: 'UAH',
       },
+      {
+        id: 6,
+        name: 'Sicilian Pizza',
+        price: 158,
+        components: [
+          'onions',
+          'anchovies',
+          'tomatoes',
+          'herbs',
+          'strong cheese',
+        ],
+        types: [PizzaType.VEGAN],
+        availableFrom: 'time',
+        currency: 'UAH',
+      },
+      {
+        id: 7,
+        name: 'New York-Style Pizza',
+        price: 164,
+        components: [
+          'tomato sauce',
+          'mozzarella cheese',
+          'pepperoni',
+          'sausage',
+          'mushroom',
+          'anchovies',
+        ],
+        types: [PizzaType.MEAT],
+        availableFrom: 'time',
+        currency: 'UAH',
+      },
+      {
+        id: 8,
+        name: 'Pizza ortolana',
+        price: 154,
+        components: [
+          'tomato sauce',
+          'mozzarella cheese',
+          'eggplant',
+          'zucchini',
+        ],
+        types: [PizzaType.VEGAN],
+        availableFrom: 'time',
+        currency: 'UAH',
+      },
     ]);
   }
 }

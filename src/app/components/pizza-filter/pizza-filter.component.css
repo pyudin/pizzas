@@ -17,3 +17,12 @@
   height: auto;
   margin: 20px auto;
 }
+.sticky-container {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+}
+hr.dotted {
+  border-top: 3px dotted #bbb;
+}
