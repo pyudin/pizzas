@@ -18,9 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class PizzaFilterComponent implements OnInit {
   private pizzasStore = inject(PizzaStore);
-  public filters$: Observable<Filter[]> = this.pizzasStore.selectFilters$.pipe(
-    map((filters) => filters)
-  );
+  public filters$: Observable<Filter[]> = this.pizzasStore.selectFilters$;
   public filterTypesControl: FormControl = new FormControl([]);
   public filterComponentsControl: FormControl = new FormControl([]);
 
