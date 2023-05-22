@@ -13,5 +13,5 @@ export class PizzaBadgeComponent {
   @Input()
   types?: string[];
 
-  public trackByFn = (index: number, item: any) => item;
+  public trackByFn = (index: number, item: string) => item;
 }

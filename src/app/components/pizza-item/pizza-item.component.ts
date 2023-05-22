@@ -13,5 +13,5 @@ import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 export class PizzaItemComponent {
   @Input() pizza?: Pizza;
 
-  public trackByFn = (index: number, item: any) => item;
+  public trackByFn = (index: number, item: string) => item;
 }

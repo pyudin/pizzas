@@ -24,8 +24,6 @@ export class PizzaFilterComponent implements OnInit {
   public filterTypesControl: FormControl = new FormControl([]);
   public filterComponentsControl: FormControl = new FormControl([]);
 
-  constructor() {}
-
   ngOnInit(): void {
     this.filterTypesControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({

@@ -8,13 +8,17 @@ import { PizzaPageComponent } from './components/pizza-page/pizza-page.component
 const routes = [
   {
     path: '',
-    // redirectTo: 'pizzas-list',
-    // pathMatch: 'full',
-    component: WelcomeComponent,
+    loadComponent: () =>
+      import('./components/welcome/welcome.component').then(
+        (m) => m.WelcomeComponent
+      ),
   },
   {
     path: 'pizzas-list',
-    component: PizzaListComponent,
+    loadComponent: () =>
+      import('./components/pizza-list/pizza-list.component').then(
+        (m) => m.PizzaListComponent
+      ),
   },
   {
     path: ':name',
