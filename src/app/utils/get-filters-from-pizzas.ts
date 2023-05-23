@@ -1,17 +1,6 @@
-import { Pizza } from '../interfaces/pizzas.interface';
+import { FilterId } from '../interfaces/pizza.enum';
+import { Filter, FilterValue, Pizza } from '../interfaces/pizzas.interface';
 
-export enum FilterId {
-  Types = 'TYPES',
-  Components = 'COMPONENTS',
-}
-export type FilterValue = {
-  value: string;
-  count: number;
-};
-export type Filter = {
-  filterId: FilterId;
-  values: FilterValue[];
-};
 export function getFiltersFromPizzas(pizzas: Pizza[]): Filter[] {
   // let filterOptions: Filter[] = Object.values(FilterId).map((filterId) => ({
   //   filterId,

@@ -4,16 +4,17 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { Filter, FilterId } from '../../utils/get-filters-from-pizzas';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
 import { Observable } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Filter } from 'src/app/interfaces/pizzas.interface';
+import { FilterId } from 'src/app/interfaces/pizza.enum';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgSelectModule, ReactiveFormsModule],
+  imports: [NgIf, AsyncPipe, NgSelectModule, ReactiveFormsModule],
   selector: 'app-pizza-filter',
   templateUrl: './pizza-filter.component.html',
   styleUrls: ['./pizza-filter.component.css'],

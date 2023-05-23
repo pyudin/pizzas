@@ -1,16 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
-import { ActiveFilter, Pizza } from '../../interfaces/pizzas.interface';
+import { ActiveFilter, Filter, FilterValue, Pizza } from '../../interfaces/pizzas.interface';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { PizzaApiService } from '../../services/pizza-api.service';
-import {
-  Filter,
-  FilterId,
-  FilterValue,
-  getFiltersFromPizzas,
-} from '../../utils/get-filters-from-pizzas';
+import { getFiltersFromPizzas } from '../../utils/get-filters-from-pizzas';
+import { FilterId } from 'src/app/interfaces/pizza.enum';
 
 export interface PizzaStoreState extends EntityState<Pizza> {
   pizzasLoaded: boolean;
@@ -55,6 +50,7 @@ const isComponentFitFn: filterCheckFn = (pizza: Pizza, values: string[]) => {
   if (!values.length) return true;
   return false;
 };
+
 const isFilterFit: filterFitMappers = {
   [FilterId.Types]: isTypeFitFn,
   [FilterId.Components]: isComponentFitFn,

@@ -1,6 +1,6 @@
-import { FilterId } from '../utils/get-filters-from-pizzas';
+import { FilterId } from './pizza.enum';
 
-export interface Pizza {
+export type Pizza = {
   id: number;
   name: string;
   price: number;
@@ -8,9 +8,19 @@ export interface Pizza {
   types: string[];
   availableFrom: string;
   currency: string;
-}
+};
 
-export interface ActiveFilter {
+export type ActiveFilter = {
   filterId: FilterId;
   values: string[];
-}
+};
+
+export type FilterValue = {
+  value: string;
+  count: number;
+};
+
+export type Filter = {
+  filterId: FilterId;
+  values: FilterValue[];
+};

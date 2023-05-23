@@ -8,16 +8,15 @@ describe('PizzaBadgeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PizzaBadgeComponent ]
-    })
-    .compileComponents();
+      imports: [PizzaBadgeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PizzaBadgeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

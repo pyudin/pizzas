@@ -11,22 +11,18 @@ import {
   NgbCalendar,
   NgbDateParserFormatter,
   NgbDateStruct,
-  NgbDatepickerConfig,
   NgbDatepickerModule,
-  NgbInputDatepickerConfig,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { Observable, of, take } from 'rxjs';
-import { FilterValue } from '../../utils/get-filters-from-pizzas';
-import { PizzaApiService } from 'src/app/services/pizza-api.service';
+import { Observable, of } from 'rxjs';
 import { NgbDateCustomParserFormatter } from 'src/app/utils/ngb-date-formater';
+import { FilterValue } from 'src/app/interfaces/pizzas.interface';
 
 @Component({
   selector: 'app-pizza-create-modal',
@@ -38,7 +34,6 @@ import { NgbDateCustomParserFormatter } from 'src/app/utils/ngb-date-formater';
     NgbDatepickerModule,
   ],
   providers: [
-    NgbInputDatepickerConfig,
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
   ],
   templateUrl: './pizza-create-modal.component.html',

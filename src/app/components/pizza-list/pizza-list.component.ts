@@ -1,15 +1,13 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnInit,
   TrackByFunction,
   inject,
 } from '@angular/core';
-import { Pizza } from '../../interfaces/pizzas.interface';
+import { Filter, Pizza } from '../../interfaces/pizzas.interface';
 import { Observable, tap } from 'rxjs';
 import { PizzaStore } from '../component-store/pizza.store';
-import { Filter } from '../../utils/get-filters-from-pizzas';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { PizzaFilterComponent } from '../pizza-filter/pizza-filter.component';
 import { PizzaItemComponent } from '../pizza-item/pizza-item.component';
@@ -45,6 +43,8 @@ export class PizzaListComponent implements OnInit {
     this.pizzaStore.getPizzas();
   }
 
-  public pizzaTrackByFn: TrackByFunction<Pizza> = (index: number, pizza: Pizza): number =>
-    pizza.id;
+  public pizzaTrackByFn: TrackByFunction<Pizza> = (
+    index: number,
+    pizza: Pizza
+  ): number => pizza.id;
 }

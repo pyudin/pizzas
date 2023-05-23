@@ -8,9 +8,8 @@ describe('PizzaFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PizzaFilterComponent ]
-    })
-    .compileComponents();
+      imports: [PizzaFilterComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PizzaFilterComponent);
     component = fixture.componentInstance;

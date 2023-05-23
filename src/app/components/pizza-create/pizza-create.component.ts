@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PizzaCreateModalComponent } from '../pizza-create-modal/pizza-create-modal.component';
 import { PizzaStore } from '../component-store/pizza.store';
 import { Observable } from 'rxjs';
-import { Filter, FilterValue } from '../../utils/get-filters-from-pizzas';
-import { Pizza } from 'src/app/interfaces/pizzas.interface';
+import { FilterValue, Pizza } from 'src/app/interfaces/pizzas.interface';
 
 @Component({
   selector: 'app-pizza-create',
