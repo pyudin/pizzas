@@ -8,7 +8,10 @@
   ></button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="pizzaFormGroup">
+  <form
+    [formGroup]="pizzaFormGroup"
+    [ngClass]="{ 'form-submitted': isSubmitted }"
+  >
     <div>Enter pizza name</div>
     <input type="text" class="form-control form-line" formControlName="name" />
     <div>Enter pizza price</div>
