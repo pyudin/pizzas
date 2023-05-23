@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  TrackByFunction,
+} from '@angular/core';
 import { Pizza } from '../../interfaces/pizzas.interface';
 import { NgFor } from '@angular/common';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
@@ -14,5 +19,6 @@ import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 export class PizzaItemComponent {
   @Input() pizza?: Pizza;
 
-  public trackByFn = (index: number, item: string) => item;
+  public trackByFn: TrackByFunction<string> = (index: number, item: string) =>
+    item;
 }

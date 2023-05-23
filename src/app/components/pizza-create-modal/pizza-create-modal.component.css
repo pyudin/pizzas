@@ -1,0 +1,14 @@
+.datepicker-container {
+  display: flex;
+  justify-content: center;
+}
+.form-line {
+  margin-bottom: 20px;
+}
+.validation-error {
+  color: #ff0000;
+}
+.error-placeholder {
+  min-height: 25px;
+  margin-left: 15px;
+}

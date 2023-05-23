@@ -22,11 +22,17 @@ const routes = [
   },
   {
     path: ':name',
-    component: PizzaPageComponent,
+    loadComponent: () =>
+      import('./components/pizza-page/pizza-page.component').then(
+        (m) => m.PizzaPageComponent
+      ),
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./components/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
   },
 ];
 

@@ -1,10 +1,10 @@
-import { Pizza } from '../../../interfaces/pizzas.interface';
+import { Pizza } from '../interfaces/pizzas.interface';
 
 export enum FilterId {
   Types = 'TYPES',
   Components = 'COMPONENTS',
 }
-type FilterValue = {
+export type FilterValue = {
   value: string;
   count: number;
 };
@@ -40,9 +40,9 @@ function getFilterValues(pizzas: Pizza[], filterType: 'types' | 'components') {
   pizzas.forEach((pizza: Pizza) => {
     pizzaTypes = [...pizzaTypes, ...pizza[filterType]];
   });
-  let pizzaTypesFiltred = pizzaTypes.filter(onlyUnique);
+  let pizzaTypesUnique = pizzaTypes.filter(onlyUnique);
   const typeFilterValues: FilterValue[] = [];
-  pizzaTypesFiltred.forEach((filterOption) => {
+  pizzaTypesUnique.forEach((filterOption) => {
     const count = pizzaTypes.filter((v) => v === filterOption).length;
     typeFilterValues.push({ value: filterOption, count });
   });

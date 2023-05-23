@@ -1,0 +1,8 @@
+.pizza-create {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  margin: 10px;
+}

@@ -1,0 +1,81 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create new pizza</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="pizzaFormGroup">
+    <div>Enter pizza name</div>
+    <input type="text" class="form-control form-line" formControlName="name" />
+    <div>Enter pizza price</div>
+    <input
+      type="number"
+      min="1"
+      step="1"
+      class="form-control form-line"
+      formControlName="price"
+    />
+    <div>Choose pizza types</div>
+    <ng-select
+      [multiple]="true"
+      [items]="pizzaTypes$ | async"
+      bindLabel="value"
+      bindValue="value"
+      placeholder="Select types"
+      formControlName="types"
+      class="form-line"
+    ></ng-select>
+    <div>Choose pizza ingredients</div>
+    <ng-select
+      [multiple]="true"
+      [items]="pizzaComponents$ | async"
+      bindLabel="value"
+      bindValue="value"
+      placeholder="Select components"
+      formControlName="components"
+      class="form-line"
+    ></ng-select>
+    <div>Choose available from date</div>
+    <div class="input-group">
+      <input
+        ngbDatepicker
+        class="form-control"
+        placeholder="dd-mm-yyyy"
+        name="dp"
+        #d="ngbDatepicker"
+        formControlName="availableFrom"
+        [minDate]="minDate"
+      />
+      <button
+        class="btn btn-outline-secondary bi bi-calendar3"
+        (click)="d.toggle()"
+        type="button"
+      ></button>
+    </div>
+  </form>
+</div>
+<div class="error-placeholder">
+  <div
+    *ngIf="
+      isSubmitted &&
+      pizzaFormGroup.invalid &&
+      (pizzaFormGroup.dirty || pizzaFormGroup.touched)
+    "
+    class="validation-error"
+  >
+    *Please fill all fields
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="onClose()">
+    Close
+  </button>
+  <button type="button" class="btn btn-outline-primary" (click)="onCreate()">
+    Create
+  </button>
+</div>

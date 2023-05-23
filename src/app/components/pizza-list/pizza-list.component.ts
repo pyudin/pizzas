@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, OnInit, TrackByFunction, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TrackByFunction,
+  inject,
+} from '@angular/core';
 import { Pizza } from '../../interfaces/pizzas.interface';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { PizzaStore } from '../component-store/pizza.store';
-import { Filter } from '../component-store/utils/get-filters-from-pizzas';
+import { Filter } from '../../utils/get-filters-from-pizzas';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { PizzaFilterComponent } from '../pizza-filter/pizza-filter.component';
 import { PizzaItemComponent } from '../pizza-item/pizza-item.component';
 import { RouterLink } from '@angular/router';
+import { PizzaCreateComponent } from '../pizza-create/pizza-create.component';
 
 @Component({
   standalone: true,
@@ -16,6 +24,7 @@ import { RouterLink } from '@angular/router';
     AsyncPipe,
     PizzaFilterComponent,
     PizzaItemComponent,
+    PizzaCreateComponent,
   ],
   providers: [PizzaStore],
   selector: 'app-pizza-list',
@@ -36,6 +45,6 @@ export class PizzaListComponent implements OnInit {
     this.pizzaStore.getPizzas();
   }
 
-  public pizzaTrackByFn: TrackByFunction<any> = (index: number, pizza): any =>
+  public pizzaTrackByFn: TrackByFunction<Pizza> = (index: number, pizza: Pizza): number =>
     pizza.id;
 }

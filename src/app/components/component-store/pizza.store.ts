@@ -8,8 +8,9 @@ import { PizzaApiService } from '../../services/pizza-api.service';
 import {
   Filter,
   FilterId,
+  FilterValue,
   getFiltersFromPizzas,
-} from './utils/get-filters-from-pizzas';
+} from '../../utils/get-filters-from-pizzas';
 
 export interface PizzaStoreState extends EntityState<Pizza> {
   pizzasLoaded: boolean;
@@ -62,7 +63,7 @@ const isFilterFit: filterFitMappers = {
 @Injectable()
 export class PizzaStore extends ComponentStore<PizzaStoreState> {
   private readonly pizzaApiService = inject(PizzaApiService);
-  
+
   public selectPizzas$ = this.select(selectAll);
   public pizzasAvailableCount$ = this.select(selectTotal);
   public isAvailablePizza$ = this.select(
@@ -81,6 +82,17 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
           return filterFn(pizza, filter.values);
         })
       )
+  );
+  public selectTypes$: Observable<FilterValue[]> = this.select(
+    (state) =>
+      state.filters.filter((filter) => filter.filterId === FilterId.Types)[0]
+        .values
+  );
+  public selectComponents$ = this.select(
+    (state) =>
+      state.filters.filter(
+        (filter) => filter.filterId === FilterId.Components
+      )[0].values
   );
 
   constructor() {
@@ -128,6 +140,23 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
           )
         );
       })
+    );
+  });
+
+  public createPizza = this.effect<Partial<Pizza>>((pizza$) => {
+    return pizza$.pipe(
+      switchMap((newPizzaRef) =>
+        this.pizzaApiService.addPizza(newPizzaRef).pipe(
+          tapResponse(
+            (newPizza) => {
+              this.patchState((state) => adapter.addOne(newPizza, state));
+            },
+            (error) => {
+              this.patchState({ error });
+            }
+          )
+        )
+      )
     );
   });
 }

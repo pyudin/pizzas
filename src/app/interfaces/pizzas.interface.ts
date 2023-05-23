@@ -1,4 +1,4 @@
-import { FilterId } from "../components/component-store/utils/get-filters-from-pizzas";
+import { FilterId } from '../utils/get-filters-from-pizzas';
 
 export interface Pizza {
   id: number;
@@ -13,5 +13,4 @@ export interface Pizza {
 export interface ActiveFilter {
   filterId: FilterId;
   values: string[];
-
 }

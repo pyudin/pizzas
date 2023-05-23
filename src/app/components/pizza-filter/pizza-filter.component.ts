@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
-  Filter,
-  FilterId,
-} from '../component-store/utils/get-filters-from-pizzas';
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { Filter, FilterId } from '../../utils/get-filters-from-pizzas';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
 import { Observable } from 'rxjs';
