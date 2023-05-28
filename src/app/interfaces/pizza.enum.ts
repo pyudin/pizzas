@@ -3,3 +3,8 @@ export enum PizzaType {
   HOT = 'Hot',
   MEAT = 'Meat',
 }
+
+export enum FilterId {
+  Types = 'TYPES',
+  Components = 'COMPONENTS',
+}

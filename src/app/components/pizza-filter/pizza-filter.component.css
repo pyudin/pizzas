@@ -1,14 +1,27 @@
-.select-container {
+.filters-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  height: 60px;
   width: 60vw;
   margin: 0 auto;
+  padding: 10px 0 0;
+}
+.filter-container {
+  flex-grow: 1;
 }
 .filter-type-count {
   background-color: aquamarine;
   border-radius: 50%;
   font-size: 8px;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 60px;
+  border-bottom: 3px dotted #bbb;
 }

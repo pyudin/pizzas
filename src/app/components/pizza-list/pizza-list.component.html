@@ -1,7 +1,8 @@
-<app-pizza-filter [filters]="filters$ | async "></app-pizza-filter>
+<app-pizza-create></app-pizza-create>
+<app-pizza-filter></app-pizza-filter>
 <div class="pizza-list-wrapper">
   <app-pizza-item
-    *ngFor="let pizza of pizzas$ | async"
+    *ngFor="let pizza of pizzas$ | async; trackBy: pizzaTrackByFn"
     [pizza]="pizza"
     class="pizza-item"
     [routerLink]="'/' + pizza.name"

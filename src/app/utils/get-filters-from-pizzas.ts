@@ -1,17 +1,6 @@
-import { Pizza } from '../../../interfaces/pizzas.interface';
+import { FilterId } from '../interfaces/pizza.enum';
+import { Filter, FilterValue, Pizza } from '../interfaces/pizzas.interface';
 
-export enum FilterId {
-  Types = 'TYPES',
-  Components = 'COMPONENTS',
-}
-type FilterValue = {
-  value: string;
-  count: number;
-};
-export type Filter = {
-  filterId: FilterId;
-  values: FilterValue[];
-};
 export function getFiltersFromPizzas(pizzas: Pizza[]): Filter[] {
   // let filterOptions: Filter[] = Object.values(FilterId).map((filterId) => ({
   //   filterId,
@@ -40,9 +29,9 @@ function getFilterValues(pizzas: Pizza[], filterType: 'types' | 'components') {
   pizzas.forEach((pizza: Pizza) => {
     pizzaTypes = [...pizzaTypes, ...pizza[filterType]];
   });
-  let pizzaTypesFiltred = pizzaTypes.filter(onlyUnique);
+  let pizzaTypesUnique = pizzaTypes.filter(onlyUnique);
   const typeFilterValues: FilterValue[] = [];
-  pizzaTypesFiltred.forEach((filterOption) => {
+  pizzaTypesUnique.forEach((filterOption) => {
     const count = pizzaTypes.filter((v) => v === filterOption).length;
     typeFilterValues.push({ value: filterOption, count });
   });

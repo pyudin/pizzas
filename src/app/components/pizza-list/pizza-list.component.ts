@@ -1,34 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { PizzaApiService } from '../../services/pizza-api.service';
-import { Pizza } from '../../interfaces/pizzas.interface';
-import { Observable, tap } from 'rxjs';
-//import { Store } from '@ngrx/store';
-//import { getPizzasRequested } from 'src/app/store/actions/pizzas.actions';
-import { PizzaStore } from '../component-store/pizza.store';
 import {
-  Filter,
-  getFiltersFromPizzas,
-} from '../component-store/utils/get-filters-from-pizzas';
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  TrackByFunction,
+  inject,
+} from '@angular/core';
+import { Filter, Pizza } from '../../interfaces/pizzas.interface';
+import { Observable, tap } from 'rxjs';
+import { PizzaStore } from '../component-store/pizza.store';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { PizzaFilterComponent } from '../pizza-filter/pizza-filter.component';
+import { PizzaItemComponent } from '../pizza-item/pizza-item.component';
+import { RouterLink } from '@angular/router';
+import { PizzaCreateComponent } from '../pizza-create/pizza-create.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    NgFor,
+    RouterLink,
+    AsyncPipe,
+    PizzaFilterComponent,
+    PizzaItemComponent,
+    PizzaCreateComponent,
+  ],
+  providers: [PizzaStore],
   selector: 'app-pizza-list',
   templateUrl: './pizza-list.component.html',
   styleUrls: ['./pizza-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PizzaListComponent implements OnInit {
-  pizzas$: Observable<Pizza[]> = this.pizzaStore.selectPizzasWithFilters$
-    .pipe
-    // tap((pizzas) => getFiltersFromPizzas(pizzas))
-    ();
-  filters$: Observable<Filter[]> = this.pizzaStore.selectFilters$;
+  private pizzaStore = inject(PizzaStore);
 
-  constructor(
-    public pizzaApi: PizzaApiService, // private store: Store
-    private pizzaStore: PizzaStore
-  ) {}
+  public pizzas$: Observable<Pizza[]> =
+    this.pizzaStore.selectPizzasWithFilters$;
+  public filters$: Observable<Filter[]> = this.pizzaStore.selectFilters$;
+
+  constructor() {}
 
   ngOnInit(): void {
     this.pizzaStore.getPizzas();
-    // this.store.dispatch(getPizzasRequested())
   }
+
+  public pizzaTrackByFn: TrackByFunction<Pizza> = (
+    index: number,
+    pizza: Pizza
+  ): number => pizza.id;
 }

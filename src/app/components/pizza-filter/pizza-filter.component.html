@@ -1,10 +1,5 @@
-<div *ngIf="filters !== null" class="select-container">
-  <select
-    class="form-select"
-    multiple
-    name="types"
-    [formControl]="filterTypesControl"
-  >
+<!-- <div *ngIf="filters$ | async as filters" class="select-container">
+  <select class="form-select" name="types" [formControl]="filterTypesControl">
     <option selected value>All</option>
     <option *ngFor="let filter of filters[0].values" [value]="filter.value">
       {{ filter.value }}
@@ -19,4 +14,36 @@
       {{ filter.value }} {{ filter.count }}
     </option>
   </select>
+</div> -->
+<div class="sticky-container">
+  <div *ngIf="filters$ | async as filters" class="filters-container">
+    <div class="filter-container">
+      <ng-select
+        [multiple]="true"
+        [items]="filters[0].values"
+        bindLabel="value"
+        bindValue="value"
+        placeholder="Select types"
+        [formControl]="filterTypesControl"
+      >
+        <ng-template ng-option-tmp let-filter="item" let-index="index">
+          {{ filter.value }} {{ filter.count }}
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="filter-container">
+      <ng-select
+        [multiple]="true"
+        [items]="filters[1].values"
+        bindLabel="value"
+        bindValue="value"
+        placeholder="Select components"
+        [formControl]="filterComponentsControl"
+      >
+        <ng-template ng-option-tmp let-filter="item" let-index="index">
+          {{ filter.value }} {{ filter.count }}
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
 </div>

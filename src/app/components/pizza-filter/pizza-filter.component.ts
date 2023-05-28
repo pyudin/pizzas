@@ -1,40 +1,43 @@
-import { Component, Input, OnInit } from '@angular/core';
 import {
-  Filter,
-  FilterId,
-} from '../component-store/utils/get-filters-from-pizzas';
-import { FormBuilder, FormControl } from '@angular/forms';
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
+import { Observable } from 'rxjs';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Filter } from 'src/app/interfaces/pizzas.interface';
+import { FilterId } from 'src/app/interfaces/pizza.enum';
 
 @Component({
+  standalone: true,
+  imports: [NgIf, AsyncPipe, NgSelectModule, ReactiveFormsModule],
   selector: 'app-pizza-filter',
   templateUrl: './pizza-filter.component.html',
   styleUrls: ['./pizza-filter.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PizzaFilterComponent implements OnInit {
-  @Input()
-  filters: Filter[] | null = [];
-  filterTypesControl: FormControl;
-  filterComponentsControl: FormControl;
-  // public pizzasWithFilters$ =
-  //   this.pizzasStore.selectPizzasWithFilters$.subscribe();
+  private pizzasStore = inject(PizzaStore);
 
-  constructor(private pizzasStore: PizzaStore, private fb: FormBuilder) {
-    this.filterTypesControl = new FormControl('types');
-    this.filterComponentsControl = new FormControl('components');
-  }
+  public filters$: Observable<Filter[]> = this.pizzasStore.selectFilters$;
+  public filterTypesControl: FormControl = new FormControl([]);
+  public filterComponentsControl: FormControl = new FormControl([]);
 
   ngOnInit(): void {
-    this.filterTypesControl.valueChanges.subscribe((value) =>
+    this.filterTypesControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
         filterId: FilterId.Types,
-        values: [value],
+        values,
       })
     );
-    this.filterComponentsControl.valueChanges.subscribe((value) =>
+    this.filterComponentsControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
         filterId: FilterId.Components,
-        values: [value],
+        values,
       })
     );
   }

@@ -1,5 +1,5 @@
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { PizzaApiService } from '../../services/pizza-api.service';
@@ -8,10 +8,10 @@ import { Pizza } from '../../interfaces/pizzas.interface';
 
 @Injectable()
 export class PizzasEffects {
-  constructor(
-    private actions$: Actions,
-    private pizzasApiService: PizzaApiService
-  ) {}
+  pizzasApiService = inject(PizzaApiService);
+
+  constructor(private actions$: Actions) {}
+  
   public getPizzas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PizzasActions.getPizzasRequested),
