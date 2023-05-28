@@ -8,6 +8,8 @@ export type Pizza = {
   types: string[];
   availableFrom: string;
   currency: string;
+  pic: string;
+  description: string;
 };
 
 export type ActiveFilter = {
@@ -23,4 +25,9 @@ export type FilterValue = {
 export type Filter = {
   filterId: FilterId;
   values: FilterValue[];
+};
+
+export type PizzaInBucket = {
+  pizzaId: number;
+  count: number;
 };

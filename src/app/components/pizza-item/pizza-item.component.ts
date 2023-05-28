@@ -1,16 +1,21 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
   TrackByFunction,
+  ViewChild,
+  inject,
 } from '@angular/core';
 import { Pizza } from '../../interfaces/pizzas.interface';
 import { NgFor } from '@angular/common';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
+import { BucketStore } from '../component-store/bucket.store';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
-  imports: [NgFor, PizzaBadgeComponent],
+  imports: [NgFor, ReactiveFormsModule, PizzaBadgeComponent],
   selector: 'app-pizza-item',
   templateUrl: './pizza-item.component.html',
   styleUrls: ['./pizza-item.component.css'],
@@ -18,6 +23,18 @@ import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 })
 export class PizzaItemComponent {
   @Input() pizza?: Pizza;
+  public bucketStore = inject(BucketStore);
+
+  public orderedNumber = new FormControl();
+
+  public addPizzaToBucket(): void {
+    if (!this.orderedNumber.value) return;
+    this.bucketStore.addPizzaToBucket(
+      this.pizza?.id as number,
+      this.orderedNumber.value
+    );
+    this.orderedNumber.setValue('');
+  }
 
   public trackByFn: TrackByFunction<string> = (index: number, item: string) =>
     item;

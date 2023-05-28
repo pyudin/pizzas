@@ -13,7 +13,7 @@
     [ngClass]="{ 'form-submitted': isSubmitted }"
   >
     <div>Enter pizza name</div>
-    <input type="text" class="form-control form-line" formControlName="name" />
+    <input type="text" class="form-control form-line focused" #focusedInput formControlName="name" />
     <div>Enter pizza price</div>
     <input
       type="number"

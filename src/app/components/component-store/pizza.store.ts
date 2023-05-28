@@ -1,11 +1,17 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { ActiveFilter, Filter, FilterValue, Pizza } from '../../interfaces/pizzas.interface';
+import {
+  ActiveFilter,
+  Filter,
+  FilterValue,
+  Pizza,
+} from '../../interfaces/pizzas.interface';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { PizzaApiService } from '../../services/pizza-api.service';
 import { getFiltersFromPizzas } from '../../utils/get-filters-from-pizzas';
 import { FilterId } from 'src/app/interfaces/pizza.enum';
+import { isNonNullish } from 'src/app/utils/nullish-check';
 
 export interface PizzaStoreState extends EntityState<Pizza> {
   pizzasLoaded: boolean;
@@ -61,6 +67,7 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
   private readonly pizzaApiService = inject(PizzaApiService);
 
   public selectPizzas$ = this.select(selectAll);
+  public selectPizzasEntities$ = this.select(selectEntities);
   public pizzasAvailableCount$ = this.select(selectTotal);
   public isAvailablePizza$ = this.select(
     this.pizzasAvailableCount$,
@@ -90,6 +97,16 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
         (filter) => filter.filterId === FilterId.Components
       )[0].values
   );
+  public selectPizzaNameById = (id: number): Observable<string> =>
+    this.select(this.selectPizzasEntities$, (pizzasEntity) => {
+      return pizzasEntity[id]?.name;
+    }).pipe(filter(isNonNullish));
+  public selectPizzaPriceById = (id: number): Observable<number> => {
+    return this.select(
+      this.selectPizzasEntities$,
+      (pizzasEntity) => pizzasEntity[id]?.price
+    ).pipe(filter(isNonNullish));
+  };
 
   constructor() {
     super(initialState);

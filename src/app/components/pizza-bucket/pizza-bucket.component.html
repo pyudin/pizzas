@@ -1,0 +1,41 @@
+<div
+  class="bucket-container"
+  [ngClass]="{ 'cursor-pointer': !!(pizzaCount$ | async) }"
+  (click)="openDetails(); $event.stopPropagation()"
+>
+  <i class="bi bi-bag-fill"></i>
+</div>
+<div
+  class="bucket-count"
+  *ngIf="pizzaCount$ | async; let count"
+  [ngClass]="{ 'cursor-pointer': !!count }"
+  (click)="openDetails()"
+>
+  {{ count }}
+</div>
+<div
+  class="bucket-open"
+  *ngIf="showBucketDetails"
+  (click)="$event.stopPropagation()"
+>
+  <div class="bucket-body">
+    <div class="bucket-row" *ngFor="let pizza of selectPizzasInBucket$ | async">
+      <div class="separator">{{ getPizzaNameById(pizza.pizzaId) | async }}</div>
+      <div class="separator separator-space"></div>
+      <div class="separator">{{ pizza.count }}</div>
+    </div>
+  </div>
+  <div class="bucket-footer">
+    <button type="button" class="btn btn-danger" (click)="clearBucket()">
+      Clear
+    </button>
+    <button
+      type="button"
+      class="btn btn-success"
+      [routerLink]="'/bucket'"
+      (click)="hideBucket()"
+    >
+      Order
+    </button>
+  </div>
+</div>

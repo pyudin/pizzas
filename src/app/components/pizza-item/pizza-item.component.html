@@ -3,10 +3,16 @@
     <div class="pizza-name">
       {{ pizza?.name }}
     </div>
-      <app-pizza-badge [types]="pizza?.types"></app-pizza-badge>
+    <app-pizza-badge [types]="pizza?.types"></app-pizza-badge>
   </div>
   <div>
-    <span *ngFor="let component of pizza?.components; let last = last; trackBy: trackByFn">
+    <span
+      *ngFor="
+        let component of pizza?.components;
+        let last = last;
+        trackBy: trackByFn
+      "
+    >
       {{ component }}{{ last ? "" : "," }}
     </span>
   </div>
@@ -16,5 +22,21 @@
   </div>
   <div class="date-container">
     {{ pizza?.availableFrom }}
+  </div>
+  <div class="order-container">
+    <input
+      type="number"
+      min="0"
+      id="orderCount"
+      class="form-control order-input"
+      [formControl]="orderedNumber"
+    />
+    <button
+      type="button"
+      class="btn btn-success order-btn"
+      (click)="addPizzaToBucket()"
+    >
+      Order
+    </button>
   </div>
 </div>

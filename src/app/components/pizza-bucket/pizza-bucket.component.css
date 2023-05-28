@@ -1,0 +1,79 @@
+.bucket-container {
+  width: 60px;
+  height: 60px;
+  border: 1px dashed #a2a2a2;
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  top: 100px;
+  z-index: 100;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #6e6e6e;
+}
+/* .bucket-container:after {
+  border-left: solid transparent 7px;
+  border-right: solid transparent 7px;
+  border-bottom: solid #ffffff 8px;
+  top: 63px;
+  content: " ";
+  height: 0;
+  right: 22px;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #333;
+} */
+.bucket-count {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  right: 25px;
+  top: 90px;
+  z-index: 101;
+  background-color: #267a33;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  user-select: none;
+}
+.bucket-open {
+  width: 200px;
+  position: fixed;
+  right: 40px;
+  top: 170px;
+  z-index: 101;
+  background-color: #ffff;
+  border: 1px solid #a2a2a2;
+  border-radius: 5px;
+  padding: 13px;
+}
+.bucket-row {
+  display: flex;
+  justify-content: space-between;
+}
+.separator {
+  border-bottom: 1px dotted #a2a2a2;
+}
+.separator-space {
+  flex-grow: 1;
+}
+.bucket-footer {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

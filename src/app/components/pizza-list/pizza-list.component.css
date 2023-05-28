@@ -3,3 +3,52 @@
   flex-direction: column;
   align-items: center;
 }
+
+.box-wrapper {
+  padding: 20px;
+
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+.pizza-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px 100px;
+  align-items: center;
+  width: 60vw;
+}
+.details-container {
+  width: 60vw;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.name-container {
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 0;
+}
+.pizza-name {
+  margin-right: 20px;
+}
+
+.price-container {
+  text-align: end;
+}
+
+.date-container {
+  text-align: end;
+}
+.accordion-button {
+  background-color: #fff;
+  color: #000;
+}
+.details-body {
+  display: flex;
+  justify-content: center;
+}
+.accordion {
+  margin: 0 40px 40px;
+}
