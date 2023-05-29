@@ -30,13 +30,13 @@ export class PizzaFilterComponent implements OnInit {
   ngOnInit(): void {
     this.filterTypesControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
-        filterId: FilterId.Types,
+        filterId: FilterId.TYPES,
         values,
       })
     );
     this.filterComponentsControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
-        filterId: FilterId.Components,
+        filterId: FilterId.COMPONENTS,
         values,
       })
     );

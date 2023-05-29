@@ -1,10 +1,15 @@
-.header-title {
-  width: 100vw;
+.header-container {
   background-color: #6f6fc3;
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   font-family: sans-serif, Cambria;
   cursor: pointer;
+}
+.header-title {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin-left: 135px;
 }

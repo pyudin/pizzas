@@ -4,18 +4,17 @@ import {
   Component,
   Input,
   TrackByFunction,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { Pizza } from '../../interfaces/pizzas.interface';
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 import { BucketStore } from '../component-store/bucket.store';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule, PizzaBadgeComponent],
+  imports: [NgFor, NgIf, NgClass, ReactiveFormsModule, PizzaBadgeComponent],
   selector: 'app-pizza-item',
   templateUrl: './pizza-item.component.html',
   styleUrls: ['./pizza-item.component.css'],
@@ -26,6 +25,7 @@ export class PizzaItemComponent {
   public bucketStore = inject(BucketStore);
 
   public orderedNumber = new FormControl();
+  public showDetails = false;
 
   public addPizzaToBucket(): void {
     if (!this.orderedNumber.value) return;

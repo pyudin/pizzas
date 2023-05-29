@@ -24,4 +24,5 @@
   margin-bottom: 10px;
   height: 60px;
   border-bottom: 3px dotted #bbb;
+  z-index: 3;
 }

@@ -58,8 +58,8 @@ const isComponentFitFn: filterCheckFn = (pizza: Pizza, values: string[]) => {
 };
 
 const isFilterFit: filterFitMappers = {
-  [FilterId.Types]: isTypeFitFn,
-  [FilterId.Components]: isComponentFitFn,
+  [FilterId.TYPES]: isTypeFitFn,
+  [FilterId.COMPONENTS]: isComponentFitFn,
 };
 
 @Injectable()
@@ -88,13 +88,13 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
   );
   public selectTypes$: Observable<FilterValue[]> = this.select(
     (state) =>
-      state.filters.filter((filter) => filter.filterId === FilterId.Types)[0]
+      state.filters.filter((filter) => filter.filterId === FilterId.TYPES)[0]
         .values
   );
   public selectComponents$ = this.select(
     (state) =>
       state.filters.filter(
-        (filter) => filter.filterId === FilterId.Components
+        (filter) => filter.filterId === FilterId.COMPONENTS
       )[0].values
   );
   public selectPizzaNameById = (id: number): Observable<string> =>
