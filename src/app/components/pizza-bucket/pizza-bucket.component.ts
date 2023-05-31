@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { BucketStore } from '../component-store/bucket.store';
 import { CommonModule } from '@angular/common';
-import { take } from 'rxjs';
+import { filter, take } from 'rxjs';
 import { PizzaStore } from '../component-store/pizza.store';
 import { RouterLink } from '@angular/router';
 
@@ -33,9 +33,14 @@ export class PizzaBucketComponent {
     this.pizzasStore.selectPizzaNameById(id);
 
   public openDetails(): void {
-    this.pizzaCount$.pipe(take(1)).subscribe((count) => {
-      if (count > 0) this.showBucketDetails = !this.showBucketDetails;
-    });
+    this.pizzaCount$
+      .pipe(
+        filter((count) => count > 0),
+        take(1)
+      )
+      .subscribe(() => {
+        this.showBucketDetails = !this.showBucketDetails;
+      });
   }
   public clearBucket(): void {
     this.bucketStore.resetBucket();

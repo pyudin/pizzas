@@ -1,3 +1,8 @@
 <div class="pizza-create">
-  <button (click)="createPizza()" class="btn btn-primary">Create pizza</button>
+  <button
+    (click)="createPizza(); $event.stopPropagation()"
+    class="btn btn-primary"
+  >
+    Create pizza
+  </button>
 </div>

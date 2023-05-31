@@ -41,8 +41,19 @@
           Order
         </button>
       </div>
+      <i
+        class="bi bi-chevron-down collapse-icon"
+        type="button"
+        [ngClass]="{ 'rotate-down': showDetails }"
+        (click)="showDetails = !showDetails"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      >
+      </i>
     </div>
-    <div class="details-content" *ngIf="showDetails">
+    <div class="details-content collapse" id="collapseExample">
       <div class="accordion-body details-body">
         <div class="details-container">
           <img
@@ -56,9 +67,9 @@
       </div>
     </div>
   </div>
-  <i
+  <!-- <i
     class="bi bi-chevron-down collapse-icon"
     [ngClass]="{ 'rotate-down': showDetails }"
     (click)="showDetails = !showDetails"
-  ></i>
+  ></i> -->
 </div>

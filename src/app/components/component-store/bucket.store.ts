@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { PizzaInBucket } from 'src/app/interfaces/pizzas.interface';
 import { PizzaStore } from './pizza.store';
@@ -12,6 +12,7 @@ export const initialState: BucketStoreState = {
   orderedPizzas: [],
 };
 
+@Injectable()
 export class BucketStore extends ComponentStore<BucketStoreState> {
   private pizzasStore = inject(PizzaStore);
   public selectPizzasInBucketCount$ = this.select((state) =>
@@ -26,8 +27,8 @@ export class BucketStore extends ComponentStore<BucketStoreState> {
     withLatestFrom(this.pizzasStore.selectPizzasEntities$),
     map(([pizzasInBucket, pizzasEntity]) => {
       return pizzasInBucket.reduce((acc, p) => {
-        return acc + p.count * (pizzasEntity[p.pizzaId]?.price ?? 0)
-      }, 0)
+        return acc + p.count * (pizzasEntity[p.pizzaId]?.price ?? 0);
+      }, 0);
     })
   );
 
@@ -38,19 +39,16 @@ export class BucketStore extends ComponentStore<BucketStoreState> {
   public addPizzaToBucket = (pizzaId: number, count: number) => {
     this.patchState((state) => {
       const pizzasInBucket = state.orderedPizzas;
-      const newPizza: boolean = !pizzasInBucket.filter(
+      const newPizzaIndex = pizzasInBucket.findIndex(
         (p) => p.pizzaId === pizzaId
-      ).length;
-      if (newPizza) {
+      );
+      if (newPizzaIndex === -1) {
         pizzasInBucket.push({ pizzaId, count });
       } else {
-        const indexOfExistingPizza = pizzasInBucket.findIndex(
-          (pizzaInBucket) => pizzaInBucket.pizzaId === pizzaId
-        );
-        pizzasInBucket[indexOfExistingPizza].count =
-          pizzasInBucket[indexOfExistingPizza].count + count;
+        pizzasInBucket[newPizzaIndex].count =
+          pizzasInBucket[newPizzaIndex].count + count;
       }
-      return { ...state, orderedPizzas: pizzasInBucket };
+      return { orderedPizzas: pizzasInBucket };
     });
   };
   public resetBucket = () => this.patchState({ orderedPizzas: [] });

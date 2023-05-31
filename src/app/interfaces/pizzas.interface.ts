@@ -31,3 +31,9 @@ export type PizzaInBucket = {
   pizzaId: number;
   count: number;
 };
+export type PizzaInBucketExtended = {
+  pizzaId: number;
+  count: number;
+  name: string;
+  price: number;
+};
