@@ -1,4 +1,4 @@
-import { FilterId } from './pizza.enum';
+import { FilterId, Sorting } from './pizza.enum';
 
 export type Pizza = {
   id: number;
@@ -37,3 +37,7 @@ export type PizzaInBucketExtended = {
   name: string;
   price: number;
 };
+export type PizzaSorting = {
+  field: Sorting;
+  direction: 'asc' | 'desc'
+}

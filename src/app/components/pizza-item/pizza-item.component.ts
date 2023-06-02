@@ -7,14 +7,14 @@ import {
   inject,
 } from '@angular/core';
 import { Pizza } from '../../interfaces/pizzas.interface';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 import { BucketStore } from '../component-store/bucket.store';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
-  imports: [NgFor, NgIf, NgClass, ReactiveFormsModule, PizzaBadgeComponent],
+  imports: [CommonModule, ReactiveFormsModule, PizzaBadgeComponent],
   selector: 'app-pizza-item',
   templateUrl: './pizza-item.component.html',
   styleUrls: ['./pizza-item.component.css'],

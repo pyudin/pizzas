@@ -4,13 +4,14 @@ import {
   Filter,
   FilterValue,
   Pizza,
+  PizzaSorting,
 } from '../../interfaces/pizzas.interface';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { PizzaApiService } from '../../services/pizza-api.service';
 import { getFiltersFromPizzas } from '../../utils/get-filters-from-pizzas';
-import { FilterId } from 'src/app/interfaces/pizza.enum';
+import { FilterId, Sorting } from 'src/app/interfaces/pizza.enum';
 import { isNonNullish } from 'src/app/utils/nullish-check';
 
 export interface PizzaStoreState extends EntityState<Pizza> {
@@ -18,6 +19,7 @@ export interface PizzaStoreState extends EntityState<Pizza> {
   pizzasLoading: boolean;
   activeFilters: ActiveFilter[];
   filters: Filter[];
+  sorting: PizzaSorting;
   error: any;
 }
 
@@ -30,6 +32,7 @@ export const initialState: PizzaStoreState = adapter.getInitialState({
   pizzasLoading: false,
   activeFilters: [],
   filters: [],
+  sorting: { field: Sorting.NAME, direction: 'desc' },
   error: null,
 });
 
@@ -61,6 +64,32 @@ const isFilterFit: filterFitMappers = {
   [FilterId.TYPES]: isTypeFitFn,
   [FilterId.COMPONENTS]: isComponentFitFn,
 };
+type PizzaSortFn = (pizzaA: Pizza, pizzaB: Pizza) => number;
+type PizzasSortMapper = {
+  [key in Sorting]: PizzaSortFn;
+};
+const sortPizzasByNameFn = (pizzaA: Pizza, pizzaB: Pizza) => {
+  if (pizzaA.name > pizzaB.name) return 1;
+  if (pizzaA.name < pizzaB.name) return -1;
+  return 0;
+};
+
+const sortPizzasByPriceFn = (pizzaA: Pizza, pizzaB: Pizza) => {
+  if (pizzaA.price > pizzaB.price) return 1;
+  if (pizzaA.price < pizzaB.price) return -1;
+  return 0;
+};
+const sortPizzasByDateFn = (pizzaA: Pizza, pizzaB: Pizza) => {
+  if (new Date(pizzaA.availableFrom) > new Date(pizzaB.availableFrom)) return 1;
+  if (new Date(pizzaA.availableFrom) < new Date(pizzaB.availableFrom))
+    return -1;
+  return 0;
+};
+const pizzaSortFn: PizzasSortMapper = {
+  [Sorting.NAME]: sortPizzasByNameFn,
+  [Sorting.PRICE]: sortPizzasByPriceFn,
+  [Sorting.AVAILABLE_DATE]: sortPizzasByDateFn,
+};
 
 @Injectable()
 export class PizzaStore extends ComponentStore<PizzaStoreState> {
@@ -73,6 +102,7 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
     this.pizzasAvailableCount$,
     (count) => count > 0
   );
+
   public selectFilters$ = this.select((state) => state.filters);
   public selectActiveFilters$ = this.select((state) => state.activeFilters);
   public selectPizzasWithFilters$ = this.select(
@@ -85,6 +115,16 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
           return filterFn(pizza, filter.values);
         })
       )
+  );
+  public selectPizzasSort$ = this.select((state) => state.sorting);
+  public selectPizzasWithSortAndFilter$ = this.select(
+    this.selectPizzasWithFilters$,
+    this.selectPizzasSort$,
+    (pizzas, sorting) => {
+      const sortingPizzas = pizzas.sort(pizzaSortFn[sorting.field]);
+      if (sorting.direction === 'desc') return sortingPizzas.reverse();
+      return sortingPizzas;
+    }
   );
   public selectTypes$: Observable<FilterValue[]> = this.select(
     (state) =>
@@ -124,6 +164,16 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
         ],
       };
       return newState;
+    });
+  };
+  public setSorting = (sortingField: Sorting) => {
+    this.patchState((state) => {
+      if (sortingField === state.sorting.field) {
+        if (state.sorting.direction === 'asc')
+          return { sorting: { field: sortingField, direction: 'desc' } };
+        else return { sorting: { field: sortingField, direction: 'asc' } };
+      }
+      return { sorting: { field: sortingField, direction: 'asc' } };
     });
   };
 

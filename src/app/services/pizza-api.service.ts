@@ -28,7 +28,7 @@ const pizzasList = [
     price: 146,
     components: ['tomato sauce', 'mozzarella cheese', 'basil'],
     types: [PizzaType.VEGAN],
-    availableFrom: '18-5-2023',
+    availableFrom: '2023-5-18',
     currency: 'UAH',
     pic: './../../../assets/margherita-pizza.jpg',
     description:
@@ -40,7 +40,7 @@ const pizzasList = [
     price: 160,
     components: ['pizza sauce', 'mozzarella cheese', 'pepperoni'],
     types: [PizzaType.HOT, PizzaType.MEAT],
-    availableFrom: '14-5-2023',
+    availableFrom: '2023-5-14',
     currency: 'UAH',
     pic: './../../../assets/pepperoni-pizza.jpg',
     description:
@@ -52,7 +52,7 @@ const pizzasList = [
     price: 138,
     components: ['pizza sauce', 'mozzarella cheese', 'chicken', 'pineapple'],
     types: [PizzaType.HOT],
-    availableFrom: '22-5-2023',
+    availableFrom: '2023-5-22',
     currency: 'UAH',
     pic: '',
     description:
@@ -71,7 +71,7 @@ const pizzasList = [
       'onions',
     ],
     types: [PizzaType.MEAT],
-    availableFrom: '29-5-2023',
+    availableFrom: '2023-5-29',
     currency: 'UAH',
     pic: '',
     description:
@@ -83,7 +83,7 @@ const pizzasList = [
     price: 154,
     components: ['chicken', 'peanut sauce', 'artichoke hearts', 'goat cheese'],
     types: [],
-    availableFrom: '13-5-2023',
+    availableFrom: '2023-5-13',
     currency: 'UAH',
     pic: '',
     description:
@@ -95,7 +95,7 @@ const pizzasList = [
     price: 158,
     components: ['onions', 'anchovies', 'tomatoes', 'herbs', 'strong cheese'],
     types: [PizzaType.VEGAN],
-    availableFrom: '14-5-2023',
+    availableFrom: '2023-5-14',
     currency: 'UAH',
     pic: '',
     description:
@@ -114,7 +114,7 @@ const pizzasList = [
       'anchovies',
     ],
     types: [PizzaType.MEAT],
-    availableFrom: '18-5-2023',
+    availableFrom: '2023-5-18',
     currency: 'UAH',
     pic: '',
     description:
@@ -126,7 +126,7 @@ const pizzasList = [
     price: 154,
     components: ['tomato sauce', 'mozzarella cheese', 'eggplant', 'zucchini'],
     types: [PizzaType.VEGAN],
-    availableFrom: '19-5-2023',
+    availableFrom: '2023-5-19',
     currency: 'UAH',
     pic: '',
     description:

@@ -16,6 +16,7 @@ import { PizzaCreateComponent } from '../pizza-create/pizza-create.component';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 import { PizzaBucketComponent } from '../pizza-bucket/pizza-bucket.component';
 import { BucketStore } from '../component-store/bucket.store';
+import { PizzaSortComponent } from '../pizza-sort/pizza-sort.component';
 
 @Component({
   standalone: true,
@@ -29,6 +30,7 @@ import { BucketStore } from '../component-store/bucket.store';
     PizzaCreateComponent,
     PizzaBadgeComponent,
     PizzaBucketComponent,
+    PizzaSortComponent,
   ],
   providers: [],
   selector: 'app-pizza-list',
@@ -40,7 +42,7 @@ export class PizzaListComponent implements OnInit {
   private pizzaStore = inject(PizzaStore);
 
   public pizzas$: Observable<Pizza[]> =
-    this.pizzaStore.selectPizzasWithFilters$;
+    this.pizzaStore.selectPizzasWithSortAndFilter$;
   public filters$: Observable<Filter[]> = this.pizzaStore.selectFilters$;
 
   constructor() {}
