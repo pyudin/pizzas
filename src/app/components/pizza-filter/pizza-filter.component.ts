@@ -47,15 +47,10 @@ export class PizzaFilterComponent implements OnInit {
     );
   }
 
-  public setSortingByName() {
-    this.pizzasStore.setSorting(Sorting.NAME);
+  public setSortingBy(property: Sorting) {
+    this.pizzasStore.setSorting(property);
   }
-  public setSortingByPrice() {
-    this.pizzasStore.setSorting(Sorting.PRICE);
-  }
-  public setSortingByDate() {
-    this.pizzasStore.setSorting(Sorting.AVAILABLE_DATE);
-  }
+
   public showSortingIcon(field: Sorting): Observable<'asc' | 'desc'> {
     return this.sorting$.pipe(
       filter((sorting) => sorting.field === field),

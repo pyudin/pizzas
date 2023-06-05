@@ -15,8 +15,6 @@ import { RouterLink } from '@angular/router';
 import { PizzaCreateComponent } from '../pizza-create/pizza-create.component';
 import { PizzaBadgeComponent } from '../pizza-badge/pizza-badge.component';
 import { PizzaBucketComponent } from '../pizza-bucket/pizza-bucket.component';
-import { BucketStore } from '../component-store/bucket.store';
-import { PizzaSortComponent } from '../pizza-sort/pizza-sort.component';
 
 @Component({
   standalone: true,
@@ -30,7 +28,6 @@ import { PizzaSortComponent } from '../pizza-sort/pizza-sort.component';
     PizzaCreateComponent,
     PizzaBadgeComponent,
     PizzaBucketComponent,
-    PizzaSortComponent,
   ],
   providers: [],
   selector: 'app-pizza-list',

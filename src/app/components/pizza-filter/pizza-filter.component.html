@@ -49,36 +49,73 @@
     </div>
   </div>
   <div class="sorting-container">
-    <div (click)="setSortingByName()">
+    <div (click)="setSortingBy(Sorting.NAME)" class="sorting-property">
       Name
-      <i
-        class="bi bi-chevron-down collapse-icon"
-        *ngIf="showSortingIcon(Sorting.NAME) | async"
-        [ngClass]="{
-          'rotate-down': (showSortingIcon(Sorting.NAME) | async) === 'desc'
-        }"
-      ></i>
+      <div class="icons-container">
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon rotate-down"
+            [ngClass]="{
+              'active-icon': (showSortingIcon(Sorting.NAME) | async) === 'desc'
+            }"
+          ></i>
+        </div>
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon"
+            [ngClass]="{
+              'active-icon': (showSortingIcon(Sorting.NAME) | async) === 'asc'
+            }"
+          ></i>
+        </div>
+      </div>
     </div>
-    <div (click)="setSortingByPrice()">
+    <div (click)="setSortingBy(Sorting.PRICE)" class="sorting-property">
       Price
-      <i
-        class="bi bi-chevron-down collapse-icon"
-        *ngIf="showSortingIcon(Sorting.PRICE) | async"
-        [ngClass]="{
-          'rotate-down': (showSortingIcon(Sorting.PRICE) | async) === 'desc'
-        }"
-      ></i>
+      <div class="icons-container">
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon rotate-down"
+            [ngClass]="{
+              'active-icon': (showSortingIcon(Sorting.PRICE) | async) === 'desc'
+            }"
+          ></i>
+        </div>
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon"
+            [ngClass]="{
+              'active-icon': (showSortingIcon(Sorting.PRICE) | async) === 'asc'
+            }"
+          ></i>
+        </div>
+      </div>
     </div>
-    <div (click)="setSortingByDate()">
+    <div
+      (click)="setSortingBy(Sorting.AVAILABLE_DATE)"
+      class="sorting-property"
+    >
       Available From
-      <i
-        class="bi bi-chevron-down collapse-icon"
-        *ngIf="showSortingIcon(Sorting.AVAILABLE_DATE) | async"
-        [ngClass]="{
-          'rotate-down':
-            (showSortingIcon(Sorting.AVAILABLE_DATE) | async) === 'desc'
-        }"
-      ></i>
+      <div class="icons-container">
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon rotate-down"
+            [ngClass]="{
+              'active-icon':
+                (showSortingIcon(Sorting.AVAILABLE_DATE) | async) === 'desc'
+            }"
+          ></i>
+        </div>
+        <div>
+          <i
+            class="bi bi-chevron-down collapse-icon"
+            [ngClass]="{
+              'active-icon':
+                (showSortingIcon(Sorting.AVAILABLE_DATE) | async) === 'asc'
+            }"
+          ></i>
+        </div>
+      </div>
     </div>
   </div>
 </div>

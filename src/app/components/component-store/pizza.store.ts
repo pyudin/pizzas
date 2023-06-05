@@ -13,6 +13,13 @@ import { PizzaApiService } from '../../services/pizza-api.service';
 import { getFiltersFromPizzas } from '../../utils/get-filters-from-pizzas';
 import { FilterId, Sorting } from 'src/app/interfaces/pizza.enum';
 import { isNonNullish } from 'src/app/utils/nullish-check';
+import {
+  compareDates,
+  compareNumbers,
+  compareStrings,
+  SelectorNumberFn,
+  SelectorStringFn,
+} from 'src/app/utils/compare';
 
 export interface PizzaStoreState extends EntityState<Pizza> {
   pizzasLoaded: boolean;
@@ -32,7 +39,7 @@ export const initialState: PizzaStoreState = adapter.getInitialState({
   pizzasLoading: false,
   activeFilters: [],
   filters: [],
-  sorting: { field: Sorting.NAME, direction: 'desc' },
+  sorting: { field: Sorting.NAME, direction: 'asc' },
   error: null,
 });
 
@@ -40,11 +47,9 @@ export const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
 
 type filterCheckFn = (pizza: Pizza, values: string[]) => boolean;
-
 type filterFitMappers = {
   [key in FilterId]: filterCheckFn;
 };
-
 const isTypeFitFn: filterCheckFn = (pizza: Pizza, values: string[]) => {
   for (let i = 0; i < values.length; i++) {
     if (pizza.types.includes(values[i])) return true;
@@ -64,31 +69,22 @@ const isFilterFit: filterFitMappers = {
   [FilterId.TYPES]: isTypeFitFn,
   [FilterId.COMPONENTS]: isComponentFitFn,
 };
-type PizzaSortFn = (pizzaA: Pizza, pizzaB: Pizza) => number;
+type PizzaSortFn = (
+  pizzaA: Pizza,
+  pizzaB: Pizza,
+  direction: 'asc' | 'desc'
+) => number;
 type PizzasSortMapper = {
   [key in Sorting]: PizzaSortFn;
 };
-const sortPizzasByNameFn = (pizzaA: Pizza, pizzaB: Pizza) => {
-  if (pizzaA.name > pizzaB.name) return 1;
-  if (pizzaA.name < pizzaB.name) return -1;
-  return 0;
-};
-
-const sortPizzasByPriceFn = (pizzaA: Pizza, pizzaB: Pizza) => {
-  if (pizzaA.price > pizzaB.price) return 1;
-  if (pizzaA.price < pizzaB.price) return -1;
-  return 0;
-};
-const sortPizzasByDateFn = (pizzaA: Pizza, pizzaB: Pizza) => {
-  if (new Date(pizzaA.availableFrom) > new Date(pizzaB.availableFrom)) return 1;
-  if (new Date(pizzaA.availableFrom) < new Date(pizzaB.availableFrom))
-    return -1;
-  return 0;
-};
+const getName: SelectorStringFn<Pizza> = (pizza: Pizza) => pizza.name;
+const getPrice: SelectorNumberFn<Pizza> = (pizza: Pizza) => pizza.price;
+const getAvailableDate: SelectorStringFn<Pizza> = (pizza: Pizza) =>
+  pizza.availableFrom;
 const pizzaSortFn: PizzasSortMapper = {
-  [Sorting.NAME]: sortPizzasByNameFn,
-  [Sorting.PRICE]: sortPizzasByPriceFn,
-  [Sorting.AVAILABLE_DATE]: sortPizzasByDateFn,
+  [Sorting.NAME]: compareStrings(getName),
+  [Sorting.PRICE]: compareNumbers(getPrice),
+  [Sorting.AVAILABLE_DATE]: compareDates(getAvailableDate),
 };
 
 @Injectable()
@@ -97,11 +93,6 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
 
   public selectPizzas$ = this.select(selectAll);
   public selectPizzasEntities$ = this.select(selectEntities);
-  public pizzasAvailableCount$ = this.select(selectTotal);
-  public isAvailablePizza$ = this.select(
-    this.pizzasAvailableCount$,
-    (count) => count > 0
-  );
 
   public selectFilters$ = this.select((state) => state.filters);
   public selectActiveFilters$ = this.select((state) => state.activeFilters);
@@ -120,11 +111,8 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
   public selectPizzasWithSortAndFilter$ = this.select(
     this.selectPizzasWithFilters$,
     this.selectPizzasSort$,
-    (pizzas, sorting) => {
-      const sortingPizzas = pizzas.sort(pizzaSortFn[sorting.field]);
-      if (sorting.direction === 'desc') return sortingPizzas.reverse();
-      return sortingPizzas;
-    }
+    (pizzas, sorting) =>
+      pizzas.sort((a, b) => pizzaSortFn[sorting.field](a, b, sorting.direction))
   );
   public selectTypes$: Observable<FilterValue[]> = this.select(
     (state) =>
@@ -141,12 +129,6 @@ export class PizzaStore extends ComponentStore<PizzaStoreState> {
     this.select(this.selectPizzasEntities$, (pizzasEntity) => {
       return pizzasEntity[id]?.name;
     }).pipe(filter(isNonNullish));
-  public selectPizzaPriceById = (id: number): Observable<number> => {
-    return this.select(
-      this.selectPizzasEntities$,
-      (pizzasEntity) => pizzasEntity[id]?.price
-    ).pipe(filter(isNonNullish));
-  };
 
   constructor() {
     super(initialState);

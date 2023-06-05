@@ -38,5 +38,27 @@
 }
 .rotate-down {
   transform: rotate(180deg);
+}
+
+.collapse-icon {
   position: absolute;
+  color: #d8d8d8;
+}
+.icons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 12px;
+  width: 10px;
+  font-size: 12px;
+  margin-left: 5px;
+  font-weight: bold;
+}
+.sorting-property {
+  display: flex;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.active-icon {
+  color: #000;
 }
