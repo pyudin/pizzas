@@ -10,6 +10,10 @@
 .header-title {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
-  margin-left: 135px;
+  justify-content: start;
+}
+.pages-container {
+  margin-right: 40px;
+  display: flex;
+  gap: 20px;
 }

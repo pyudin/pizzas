@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UserAdminGuard } from './guards/user-admin.guard';
 
 const routes = [
   {
@@ -21,6 +22,21 @@ const routes = [
     loadComponent: () =>
       import('./components/pizza-bucket-page/pizza-bucket-page.component').then(
         (m) => m.PizzaBucketPageComponent
+      ),
+  },
+  {
+    path: 'reporting',
+    canMatch: [UserAdminGuard],
+    loadComponent: () =>
+      import('./components/reporting-page/reporting-page.component').then(
+        (m) => m.ReportingPageComponent
+      ),
+  },
+  {
+    path: 'reporting',
+    loadComponent: () =>
+      import('./components/access-denied/access-denied.component').then(
+        (m) => m.AccessDeniedComponent
       ),
   },
   {

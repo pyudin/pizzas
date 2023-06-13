@@ -16,7 +16,6 @@ export class PizzaApiService {
   public addPizza(pizza: Partial<Pizza>): Observable<Pizza> {
     const newId = this.pizzas[this.pizzas.length - 1].id + 1;
     this.pizzas.push({ ...pizza, id: newId } as Pizza);
-    console.log(this.pizzas);
     return of({ ...pizza, id: newId } as Pizza);
   }
 }

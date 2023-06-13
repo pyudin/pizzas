@@ -1,5 +1,23 @@
-<div [routerLink]="''" class="header-container">
-  <h1 class="header-title">Pizzas</h1>
-  <app-pizza-create></app-pizza-create>
+<div class="header-container">
+  <h1 [routerLink]="''" class="header-title">Pizzas</h1>
+  <div class="pages-container">
+    <div [routerLink]="'pizzas-list'">Pizzas list</div>
+    <div [routerLink]="'reporting'">Reporting Page</div>
+    <div
+      (click)="userLogin()"
+      *ngIf="!(userLoaded$ | async)"
+      [routerLink]="'pizzas-list'"
+    >
+      Login
+    </div>
+    <div
+      (click)="userLogout()"
+      *ngIf="userLoaded$ | async"
+      [routerLink]="'pizzas-list'"
+    >
+      Logout
+    </div>
+  </div>
 </div>
+
 <router-outlet></router-outlet>

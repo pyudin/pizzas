@@ -26,7 +26,7 @@ export class PizzaBucketPageComponent {
       map(([pizzasInBucket, pizzas]) => {
         return pizzasInBucket.map((pizzaInBucket) => {
           const pizzaIndex = pizzas.findIndex(
-            (p) => (p.id = pizzaInBucket.pizzaId)
+            (p) => p.id === pizzaInBucket.pizzaId
           );
           const pizza: Partial<PizzaInBucketExtended> = pizzaInBucket;
           pizza.name = pizzas[pizzaIndex].name;
