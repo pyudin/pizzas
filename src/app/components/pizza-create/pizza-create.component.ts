@@ -36,8 +36,9 @@ export class PizzaCreateComponent {
         console.log(data);
         this.pizzaStore.createPizza(pizzaWithFormattedDate as Partial<Pizza>);
       },
-      () => {
+      (data) => {
         // on error/dismiss
+        console.log(data);
       }
     );
   }

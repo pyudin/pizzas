@@ -5,6 +5,12 @@ export enum PizzaType {
 }
 
 export enum FilterId {
-  Types = 'TYPES',
-  Components = 'COMPONENTS',
+  TYPES = 'Types',
+  COMPONENTS = 'Components',
+}
+
+export enum Sorting {
+  NAME = 'Name',
+  PRICE = 'Price',
+  AVAILABLE_DATE = 'AvailableDate',
 }

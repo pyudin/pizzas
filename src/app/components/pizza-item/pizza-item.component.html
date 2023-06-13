@@ -1,20 +1,75 @@
 <div class="box-wrapper">
-  <div class="name-container">
-    <div class="pizza-name">
-      {{ pizza?.name }}
+  <div class="box-container">
+    <div class="main-content">
+      <div class="name-container">
+        <div class="pizza-name">
+          {{ pizza?.name }}
+        </div>
+        <app-pizza-badge [types]="pizza?.types"></app-pizza-badge>
+      </div>
+      <div>
+        <span
+          *ngFor="
+            let component of pizza?.components;
+            let last = last;
+            trackBy: trackByFn
+          "
+        >
+          {{ component }}{{ last ? "" : "," }}
+        </span>
+      </div>
+      <div class="price-container">
+        {{ pizza?.price }}
+        {{ pizza?.currency }}
+      </div>
+      <div class="date-container">
+        {{ pizza?.availableFrom | date : "d-MM-YYYY" }}
+      </div>
+      <div class="order-container">
+        <input
+          type="number"
+          min="0"
+          id="orderCount"
+          class="form-control order-input"
+          [formControl]="orderedNumber"
+        />
+        <button
+          type="button"
+          class="btn btn-success order-btn"
+          (click)="addPizzaToBucket()"
+        >
+          Order
+        </button>
+      </div>
+      <i
+        class="bi bi-chevron-down collapse-icon"
+        type="button"
+        [ngClass]="{ 'rotate-down': showDetails }"
+        (click)="showDetails = !showDetails"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      >
+      </i>
     </div>
-      <app-pizza-badge [types]="pizza?.types"></app-pizza-badge>
+    <div class="details-content collapse" id="collapseExample">
+      <div class="accordion-body details-body">
+        <div class="details-container">
+          <img
+            [src]="pizza?.pic"
+            width="200"
+            height="200"
+            [alt]="pizza?.name"
+          />
+          {{ pizza?.description }}
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <span *ngFor="let component of pizza?.components; let last = last; trackBy: trackByFn">
-      {{ component }}{{ last ? "" : "," }}
-    </span>
-  </div>
-  <div class="price-container">
-    {{ pizza?.price }}
-    {{ pizza?.currency }}
-  </div>
-  <div class="date-container">
-    {{ pizza?.availableFrom }}
-  </div>
+  <!-- <i
+    class="bi bi-chevron-down collapse-icon"
+    [ngClass]="{ 'rotate-down': showDetails }"
+    (click)="showDetails = !showDetails"
+  ></i> -->
 </div>

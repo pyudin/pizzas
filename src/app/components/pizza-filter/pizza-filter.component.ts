@@ -6,15 +6,15 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PizzaStore } from '../component-store/pizza.store';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, take } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Filter } from 'src/app/interfaces/pizzas.interface';
-import { FilterId } from 'src/app/interfaces/pizza.enum';
+import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
+import { Filter, PizzaSorting } from 'src/app/interfaces/pizzas.interface';
+import { FilterId, Sorting } from 'src/app/interfaces/pizza.enum';
 
 @Component({
   standalone: true,
-  imports: [NgIf, AsyncPipe, NgSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, NgSelectModule, ReactiveFormsModule],
   selector: 'app-pizza-filter',
   templateUrl: './pizza-filter.component.html',
   styleUrls: ['./pizza-filter.component.css'],
@@ -23,22 +23,38 @@ import { FilterId } from 'src/app/interfaces/pizza.enum';
 export class PizzaFilterComponent implements OnInit {
   private pizzasStore = inject(PizzaStore);
 
+  public Sorting = Sorting;
+
   public filters$: Observable<Filter[]> = this.pizzasStore.selectFilters$;
+  public sorting$: Observable<PizzaSorting> =
+    this.pizzasStore.selectPizzasSort$;
+
   public filterTypesControl: FormControl = new FormControl([]);
   public filterComponentsControl: FormControl = new FormControl([]);
 
   ngOnInit(): void {
     this.filterTypesControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
-        filterId: FilterId.Types,
+        filterId: FilterId.TYPES,
         values,
       })
     );
     this.filterComponentsControl.valueChanges.subscribe((values) =>
       this.pizzasStore.setActiveFilters({
-        filterId: FilterId.Components,
+        filterId: FilterId.COMPONENTS,
         values,
       })
+    );
+  }
+
+  public setSortingBy(property: Sorting) {
+    this.pizzasStore.setSorting(property);
+  }
+
+  public showSortingIcon(field: Sorting): Observable<'asc' | 'desc'> {
+    return this.sorting$.pipe(
+      filter((sorting) => sorting.field === field),
+      map((sorting) => sorting.direction)
     );
   }
 }

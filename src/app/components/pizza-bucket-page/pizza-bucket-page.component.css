@@ -1,0 +1,80 @@
+.bucket-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bucket-content {
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+.bucket-header {
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.bucket-body {
+  flex-grow: 1;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 30px;
+}
+.bucket-left-side {
+  min-width: 250px;
+}
+.bucket-right-side {
+  min-width: 250px;
+}
+.address-input {
+  margin-bottom: 10px;
+}
+
+.bucket-footer {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+.justify-center {
+  justify-content: center;
+}
+.empty-bucket {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  justify-content: center;
+}
+.bucket-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+.center-text {
+  text-align: center;
+}
+table tfoot tr {
+  background-color: rgb(223, 223, 223);
+  font-weight: bold;
+}
+input:invalid + span::after {
+  position: absolute;
+  content: "✖";
+  padding-left: 5px;
+}
+
+input:valid + span::after {
+  position: absolute;
+  content: "✓";
+  padding-left: 5px;
+}
+.time-input {
+  display: flex;
+  max-width: 130px;
+}
+.validity {
+  margin-top: 6px;
+}

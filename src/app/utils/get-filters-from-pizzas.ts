@@ -13,11 +13,11 @@ export function getFiltersFromPizzas(pizzas: Pizza[]): Filter[] {
   let filterOptions: Filter[] = [];
 
   filterOptions.push({
-    filterId: FilterId.Types,
+    filterId: FilterId.TYPES,
     values: getFilterValues(pizzas, 'types'),
   });
   filterOptions.push({
-    filterId: FilterId.Components,
+    filterId: FilterId.COMPONENTS,
     values: getFilterValues(pizzas, 'components'),
   });
 

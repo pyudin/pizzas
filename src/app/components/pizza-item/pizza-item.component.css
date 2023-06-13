@@ -1,14 +1,21 @@
-.box-wrapper {
-  width: 60vw;
+.box-container {
+  width: 80vw;
   border: 1px solid #000000;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 20px;
+}
+.main-content {
   display: grid;
-  grid-template-columns: 1fr 1fr 100px 100px;
+  grid-template-columns: 1fr 1fr 100px 100px 150px;
   align-items: center;
 }
-
+.details-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
 .name-container {
   display: flex;
   align-items: center;
@@ -24,4 +31,30 @@
 
 .date-container {
   text-align: end;
+}
+.order-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+.order-input {
+  max-width: 80px;
+  margin-bottom: 10px;
+}
+.order-btn {
+  min-width: 80px;
+}
+
+.box-wrapper {
+  position: relative;
+}
+.collapse-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.rotate-down {
+  transform: rotate(180deg);
 }

@@ -1,8 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnInit,
+  Renderer2,
+  ViewChild,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -40,13 +44,16 @@ import { FilterValue } from 'src/app/interfaces/pizzas.interface';
   styleUrls: ['./pizza-create-modal.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PizzaCreateModalComponent implements OnInit {
+export class PizzaCreateModalComponent implements OnInit, AfterViewInit {
+  @ViewChild('focusedInput', { static: true }) myInput: ElementRef<HTMLInputElement> 
+
   @Input() pizzaTypes$: Observable<FilterValue[]> = of();
   @Input() pizzaComponents$: Observable<FilterValue[]> = of();
 
   public activeModal = inject(NgbActiveModal);
   public fb = inject(FormBuilder);
   private calendar = inject(NgbCalendar);
+  private renderer = inject(Renderer2);
 
   public pizzaFormGroup: FormGroup;
   public minDate: NgbDateStruct = this.calendar.getToday();
@@ -64,6 +71,10 @@ export class PizzaCreateModalComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.renderer.selectRootElement(this.myInput.nativeElement).focus();
+  }
 
   public onClose(): void {
     this.activeModal.dismiss();

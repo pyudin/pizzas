@@ -6,3 +6,6 @@
 .btn {
   margin: 10px;
 }
+button:focus {
+  box-shadow: none;
+}

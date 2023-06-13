@@ -1,0 +1,83 @@
+<div class="bucket-container">
+  <div class="bucket-content">
+    <div class="bucket-header">
+      <h4>Complete the order</h4>
+    </div>
+    <div
+      class="bucket-body"
+      *ngIf="(selectPizzasInBucket$ | async)?.length; else noPizzasAdded"
+    >
+      <div class="bucket-left-side">
+        <table class="table table-strip">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th class="center-text">Qty</th>
+              <th class="center-text">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pizza of selectPizzasInBucketExtended$ | async">
+              <td>{{ pizza.name }}</td>
+              <td class="center-text">{{ pizza.count }}</td>
+              <td class="center-text">
+                {{ pizza.price * pizza.count }} UAH
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Summary</td>
+              <td class="center-text">{{ getBucketPizzasCount$ | async }}</td>
+              <td class="center-text">{{ getBucketPizzasSum$ | async }} UAH</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="bucket-right-side">
+        <label for="address">Delivery address:</label>
+        <input type="text" name="address" class="form-control address-input" />
+        <label for="time">Delivery time:</label>
+        <div class="time-input">
+          <input
+            type="time"
+            name="time"
+            class="form-control"
+            [value]="getMinDeliveryTime()"
+            [min]="getMinDeliveryTime()"
+            max="23:00"
+          />
+          <span class="validity"></span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="bucket-footer"
+      *ngIf="(selectPizzasInBucket$ | async)?.length; else noPizzasAddedFooter"
+    >
+      <button
+        class="btn btn-danger"
+        [routerLink]="'/pizzas-list'"
+        (click)="clearBucket()"
+      >
+        {{ "Clear" }}
+      </button>
+      <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPizzasAdded>
+  <div class="bucket-body empty-bucket">No pizza added</div>
+</ng-template>
+<ng-template #noPizzasAddedFooter>
+  <div class="bucket-footer justify-center">
+    <button
+      class="btn btn-danger"
+      [routerLink]="'/pizzas-list'"
+      (click)="clearBucket()"
+    >
+      {{ "Back to pizzas list" }}
+    </button>
+  </div>
+</ng-template>
