@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'pizza';
+  public title = 'pizza';
   public userLoaded$: Observable<boolean> =
     this.store.select(getCurrentUserLoaded);
 

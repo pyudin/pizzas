@@ -7,7 +7,7 @@ import { UserApiService } from 'src/app/services/user-api.service';
 
 @Injectable()
 export class UserEffects implements OnInitEffects {
-  userApiService = inject(UserApiService);
+  private userApiService = inject(UserApiService);
 
   constructor(private actions$: Actions) {}
 

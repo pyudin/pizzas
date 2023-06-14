@@ -8,7 +8,7 @@ import { Pizza } from '../../interfaces/pizzas.interface';
 
 @Injectable()
 export class PizzasEffects {
-  pizzasApiService = inject(PizzaApiService);
+  private pizzasApiService = inject(PizzaApiService);
 
   constructor(private actions$: Actions) {}
   

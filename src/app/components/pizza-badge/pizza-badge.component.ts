@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, Input, TrackByFunction } from '@ang
 })
 export class PizzaBadgeComponent {
   @Input()
-  types?: string[];
+  public types?: string[];
 
   public trackByFn: TrackByFunction<string>= (index: number, item: string) => item;
 }

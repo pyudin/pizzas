@@ -21,7 +21,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PizzaItemComponent {
-  @Input() pizza?: Pizza;
+  @Input() 
+  public pizza?: Pizza;
   public bucketStore = inject(BucketStore);
 
   public orderedNumber = new FormControl();
