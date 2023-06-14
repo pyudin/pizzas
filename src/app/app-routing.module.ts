@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserAdminGuard } from './guards/user-admin.guard';
+import { filterResolver } from './resolvers/load-filters.resolver';
 
 const routes = [
   {
@@ -27,6 +28,7 @@ const routes = [
   {
     path: 'reporting',
     canMatch: [UserAdminGuard],
+    resolve: { filters: filterResolver },
     loadComponent: () =>
       import('./components/reporting-page/reporting-page.component').then(
         (m) => m.ReportingPageComponent

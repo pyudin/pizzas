@@ -1,10 +1,17 @@
 .sticky-container {
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    width: 100%;
-    margin-bottom: 10px;
-    height: 100px;
-    border-bottom: 3px dotted #bbb;
-    z-index: 3;
-  }
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 100px;
+  border-bottom: 3px dotted #bbb;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+.filter-container {
+  width: 300px;
+}

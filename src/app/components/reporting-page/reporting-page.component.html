@@ -1,1 +1,18 @@
-<div class="sticky-container">Filters</div>
+<div class="sticky-container">
+  <div class="filter-container">
+    <ng-select
+      [multiple]="false"
+      [clearable]="false"
+      [searchable]="false"
+      [items]="filters.values"
+      bindLabel="value"
+      bindValue="value"
+      placeholder="Select year"
+      [formControl]="yearsFilter"
+    >
+      <ng-template ng-option-tmp let-filter="item" let-index="index">
+        {{ filter.value }} {{ filter.count }}
+      </ng-template>
+    </ng-select>
+  </div>
+</div>
